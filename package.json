@@ -1,0 +1,22 @@
+{
+  "name": "holyjs-kontur-game",
+  "version": "1.0.0",
+  "description": "Игра на стенд [Контура](https://kontur.ru) на конференции [HolyJS Piter 2018](https://holyjs-piter.ru).",
+  "main": "script.js",
+  "scripts": {
+    "serve": "browser-sync start --server --watch --files \"./\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sashasushko/holyjs-kontur-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sashasushko/holyjs-kontur-game/issues"
+  },
+  "homepage": "https://github.com/sashasushko/holyjs-kontur-game#readme",
+  "devDependencies": {
+    "browser-sync": "^2.24.4"
+  }
+}
