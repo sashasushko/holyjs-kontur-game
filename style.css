@@ -3,7 +3,7 @@ body {
     font-family: sans-serif;
 }
 
-.game {
+.deck {
     overflow: hidden;
     position: relative;
     width: 100vw;

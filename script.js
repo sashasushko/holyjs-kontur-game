@@ -1,60 +1,201 @@
-var game = document.querySelector(".game");
-var brickHeight = 24;
-var maxPosition = game.clientHeight - brickHeight;
-var lapTime = 5;
-var speed = maxPosition / lapTime;
 var limit = 5;
-var bricks = 0;
+var max = 20;
+var count = 0;
+var fail = 0;
+var height = 24;
+
+var tasks = [
+    {
+        content: "Some code string 1",
+        side: "left"
+    },
+    {
+        content: "Some code string 2",
+        side: "right"
+    },
+    {
+        content: "Some code string 3",
+        side: "right"
+    },
+    {
+        content: "Some code string 4",
+        side: "left"
+    },
+    {
+        content: "Some code string 5",
+        side: "right"
+    },
+    {
+        content: "Some code string 6",
+        side: "left"
+    },
+    {
+        content: "Some code string 7",
+        side: "left"
+    },
+    {
+        content: "Some code string 8",
+        side: "right"
+    },
+    {
+        content: "Some code string 9",
+        side: "right"
+    },
+    {
+        content: "Some code string 10",
+        side: "right"
+    },
+    {
+        content: "Some code string 11",
+        side: "left"
+    },
+    {
+        content: "Some code string 12",
+        side: "right"
+    },
+    {
+        content: "Some code string 13",
+        side: "right"
+    },
+    {
+        content: "Some code string 14",
+        side: "right"
+    },
+    {
+        content: "Some code string 15",
+        side: "left"
+    },
+    {
+        content: "Some code string 16",
+        side: "left"
+    },
+    {
+        content: "Some code string 17",
+        side: "right"
+    },
+    {
+        content: "Some code string 18",
+        side: "right"
+    },
+    {
+        content: "Some code string 19",
+        side: "right"
+    },
+    {
+        content: "Some code string 20",
+        side: "right"
+    },
+];
+
+var deck = document.querySelector(".deck");
+
+var random = function(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
 
 var step = function() {
-    var brick = document.createElement("div");
+    let index = random(0, tasks.length);
+    let { content, side } = tasks[index];
+    tasks = [...tasks.slice(0, index), ...tasks.slice(index + 1)];
+
+    let brick = document.createElement("div");
     brick.classList.add("brick");
-    brick.textContent = "Some code string";
-    game.appendChild(brick);
-    var endPosition = maxPosition - (bricks * brickHeight);
-    var duration = endPosition / speed;
+    brick.textContent = content + " / " + side;
+    brick.dataset.side = side;
+    deck.appendChild(brick);
+
+    let endPosition = (deck.clientHeight - height) - (height * fail);
+
     setTimeout(function() {
         brick.classList.add("animate");
-        brick.style.transitionDuration = `${duration}s`;
+        brick.style.transitionDuration = "5s";
         brick.style.transform = `translateX(-50%) translateY(${endPosition}px)`;
     }, 0);
-    var onKeydown = function(evt) {
-        if (evt.keyCode === 37 || evt.keyCode === 39) {
-            var position = brick.getBoundingClientRect()
-            brick.classList.remove("animate");
+
+    const onDropTransitionEnd = function() {
+        brick.removeEventListener("transitionend", onDropTransitionEnd);
+        document.removeEventListener("keydown", onArrowKeyDown);
+        count++;
+        fail++;
+        brick.classList.remove("animate");
+        brick.style.transitionDuration = "";
+        if (fail < limit && count < max) {
+            step();
+        } else if (fail >= limit) {
+            console.log("You lose!");
+        } else if (count >= max) {
+            console.log("You win!");
+        }
+    };
+
+    const onArrowKeyDown = function(evt) {
+        if (evt.keyCode !== 37 && evt.keyCode !== 39) {
+            return false;
+        }
+
+        brick.removeEventListener("transitionend", onDropTransitionEnd);
+
+        document.removeEventListener("keydown", onArrowKeyDown);
+
+        let userSide = evt.keyCode === 37 ? "left" : "right";
+        let position = brick.getBoundingClientRect();
+
+        if (userSide === side) {
             brick.style.transitionDuration = "";
             brick.style.transform = `translateX(-50%) translateY(${position.top}px)`;
 
-            if (evt.keyCode === 37) {
-                setTimeout(function() {
-                    brick.classList.add("animate");
-                    brick.style.transitionDuration = "0.5s";
-                    brick.style.transform = `translateX(-50%) translateY(${endPosition}px)`;
-                }, 0);
-            }
+            let shiftX = side === "left" ? (-(position.left + brick.clientWidth)) : (deck.clientWidth - position.left);
 
-            if (evt.keyCode === 39) {
-                bricks--;
-                setTimeout(function() {
-                    brick.classList.add("animate");
-                    brick.style.transitionDuration = `1s`;
-                    brick.style.transform = `translateX(${game.clientWidth - position.left}px) translateY(${position.top}px)`;
-                }, 0);
-            }
+            setTimeout(function() {
+                brick.style.transitionDuration = "0.5s";
+                brick.style.transform = `translateX(${shiftX}px) translateY(${position.top}px)`;
+            }, 0);
 
-            document.removeEventListener("keydown", onKeydown);
+            const onSuccessTransitionEnd = function() {
+                count++;
+                brick.remove();
+                if (fail < limit && count < max) {
+                    step();
+                } else if (fail >= limit) {
+                    console.log("You lose!");
+                } else if (count >= max) {
+                    console.log("You win!");
+                }
+                brick.removeEventListener("transitionend", onSuccessTransitionEnd);
+            };
+
+            brick.addEventListener("transitionend", onSuccessTransitionEnd);
+        } else {
+            brick.style.transitionDuration = "";
+            brick.style.transform = `translateX(-50%) translateY(${position.top}px)`;
+
+            setTimeout(function() {
+                brick.style.transitionDuration = "0.5s";
+                brick.style.transform = `translateX(-50%) translateY(${endPosition}px)`;
+            }, 0);
+
+            const onFailTransitionEnd = function() {
+                count++;
+                fail++;
+                brick.classList.remove("animate");
+                brick.style.transitionDuration = "";
+                if (fail < limit && count < max) {
+                    step();
+                } else if (fail >= limit) {
+                    console.log("You lose!");
+                } else if (count >= max) {
+                    console.log("You win!");
+                }
+                brick.removeEventListener("transitionend", onFailTransitionEnd);
+            };
+
+            brick.addEventListener("transitionend", onFailTransitionEnd);
         }
     };
-    document.addEventListener("keydown", onKeydown);
-    var onTransitionend = function() {
-                bricks++;
-        if (bricks < limit) {
-            step();
-        }
-        brick.removeEventListener("transitionend", onTransitionend);
-        document.removeEventListener("keydown", onKeydown);
-    };
-    brick.addEventListener("transitionend", onTransitionend);
+
+    brick.addEventListener("transitionend", onDropTransitionEnd);
+
+    document.addEventListener("keydown", onArrowKeyDown);
 };
 
 step();
