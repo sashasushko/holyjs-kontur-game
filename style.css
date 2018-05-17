@@ -23,3 +23,7 @@ body {
     transition-duration: 0s;
     transition-timing-function: linear;
 }
+
+.hidden {
+    display: none;
+}

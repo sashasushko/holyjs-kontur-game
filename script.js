@@ -87,11 +87,26 @@ var tasks = [
     },
 ];
 
+var startBtn = document.querySelector(".start");
 var deck = document.querySelector(".deck");
 
 var random = function(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
+
+var lose = function() {
+    alert("You lose!");
+    deck.innerHTML = "";
+    deck.classList.add("hidden");
+    startBtn.classList.remove("hidden");
+};
+
+var win = function() {
+    alert("You win!");
+    deck.innerHTML = "";
+    deck.classList.add("hidden");
+    startBtn.classList.remove("hidden");
+};
 
 var step = function() {
     let index = random(0, tasks.length);
@@ -122,9 +137,9 @@ var step = function() {
         if (fail < limit && count < max) {
             step();
         } else if (fail >= limit) {
-            console.log("You lose!");
+            lose();
         } else if (count >= max) {
-            console.log("You win!");
+            win();
         }
     };
 
@@ -157,9 +172,9 @@ var step = function() {
                 if (fail < limit && count < max) {
                     step();
                 } else if (fail >= limit) {
-                    console.log("You lose!");
+                    lose();
                 } else if (count >= max) {
-                    console.log("You win!");
+                    win();
                 }
                 brick.removeEventListener("transitionend", onSuccessTransitionEnd);
             };
@@ -182,9 +197,9 @@ var step = function() {
                 if (fail < limit && count < max) {
                     step();
                 } else if (fail >= limit) {
-                    console.log("You lose!");
+                    lose();
                 } else if (count >= max) {
-                    console.log("You win!");
+                    win();
                 }
                 brick.removeEventListener("transitionend", onFailTransitionEnd);
             };
@@ -198,4 +213,8 @@ var step = function() {
     document.addEventListener("keydown", onArrowKeyDown);
 };
 
-step();
+var start = function() {
+    startBtn.classList.add("hidden");
+    deck.classList.remove("hidden");
+    step();
+};
