@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sashasushko/holyjs-kontur-game#readme",
   "devDependencies": {
-    "browser-sync": "^2.24.4"
+    "browser-sync": "^2.24.4",
+    "prettier": "^1.11.1"
   }
 }
