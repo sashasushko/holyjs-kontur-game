@@ -16,7 +16,7 @@ body {
 .game-screen {
     display: flex;
     flex-direction: column;
-    align-items: justify;
+    align-items: stretch;
     justify-content: flex-start;
     width: 100vw;
     height: 100vh;
@@ -37,18 +37,18 @@ body {
 }
 
 .username {
-    width: 45%;
+    width: 33%;
     color: var(--color-accent-dark);
 }
 
 .level {
-    width: 30%;
+    width: 34%;
     color: var(--color-accent-light);
     text-align: center;
 }
 
 .score {
-    width: 25%;
+    width: 33%;
     color: var(--color-accent-dark);
     text-align: right;
 }
@@ -124,6 +124,10 @@ body {
 
 .game-deck {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
     flex-grow: 1;
     height: 100%;
 }
