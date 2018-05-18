@@ -5,11 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kontur Game</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Stalinist+One|PT+Mono&amp;subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="start" onclick="start()">Start Game</button>
-    <div class="deck hidden"></div>
+    <div class="game-screen">
+        <div class="header">
+            <div class="username">ivan@pupkin.ru</div>
+            <div class="level">Сложный</div>
+            <div class="score">98765</div>
+        </div>
+        <div class="level-task">
+            <div class="question">Эта возможность была добавлена в ES5?</div>
+            <div class="answers">
+                <div class="answers-left">Нет</div>
+                <div class="answers-right">Да</div>
+            </div>
+        </div>
+        <div class="game-deck">
+            <div class="limit">
+                <span class="limit-label">Лимит</span>
+            </div>
+            <div class="bricks">
+                <div class="brick">NaN</div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

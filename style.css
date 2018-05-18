@@ -1,31 +1,186 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 24px;
+:root {
+    --color-accent-dark: #ffc4ea;
+    --color-accent-light: #e4e594;
 }
 
-.deck {
-    overflow: hidden;
-    position: relative;
+body {
+    margin: 0;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Game Screen */
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: justify;
+    justify-content: flex-start;
     width: 100vw;
     height: 100vh;
+}
+
+.header {
+    padding: 25px 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    background-color: #222222;
+    font-family: 'Stalinist One', cursive;
+    font-size: 24px;
+    line-height: 30px;
+    box-sizing: border-box;
+}
+
+.username {
+    width: 45%;
+    color: var(--color-accent-dark);
+}
+
+.level {
+    width: 30%;
+    color: var(--color-accent-light);
+    text-align: center;
+}
+
+.score {
+    width: 25%;
+    color: var(--color-accent-dark);
+    text-align: right;
+}
+
+.level-task {
+    flex-shrink: 0;
+    padding: 40px 30px 45px;
+    background-color: #111;
+}
+
+.question {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1000px;
+    font-size: 36px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.answers {
+    margin-top: 30px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.answers-left,
+.answers-right {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.answers-left {
+    justify-content: flex-end;
+    padding-right: 50px;
+    color: #9190ff;
+}
+
+.answers-right {
+    justify-content: flex-start;
+    padding-left: 50px;
+    color: #ff6ecc;
+}
+
+.answers-left::before,
+.answers-right::after {
+    content: '';
+    width: 46px;
+    height: 40px;
+    border: 2px solid;
+    border-radius: 6px;
+    background-repeat: no-repeat;
+}
+
+.answers-left::before {
+    margin-right: 15px;
+    border-color: rgba(145, 144, 255, 0.6);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='10' width='12' fill='rgba%28145, 144, 255, 0.8%29'%3E%3Cpolygon points='12,0 12,10 0,5' /%3E%3C/svg%3E");
+    background-position: center left 16px;
+}
+
+.answers-right::after {
+    margin-left: 15px;
+    border-color: rgba(255, 110, 204, 0.6);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='10' width='12' fill='rgba%28255, 110, 204, 0.8%29'%3E%3Cpolygon points='0,0 12,5 0,10' /%3E%3C/svg%3E");
+
+    background-position: center right 16px;
+}
+
+.game-deck {
+    position: relative;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.limit {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e40058;
+}
+
+.limit-label {
+    position: absolute;
+    top: -15px;
+    left: 0;
+    padding: 4px 4px 4px 8px;
+    height: 32px;
+    background-color: #e40058;
+    font-family: 'Stalinist One', cursive;
+    font-size: 20px;
+    line-height: 24px;
+    box-sizing: border-box;
+}
+
+.limit-label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    border: 16px solid transparent;
+    border-right: none;
+    border-left-color: #e40058;
+}
+
+.bricks {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
 }
 
 .brick {
     position: absolute;
     top: 0;
     left: 50%;
+    padding: 4px 10px;
     transform: translateX(-50%) translateY(0);
-    border: 3px solid pink;
+    background-color: #b5ebf2;
+    color: #000000;
+    font-size: 32px;
+    line-height: 36px;
+    white-space: nowrap;
 }
 
 .animate {
     transition-property: transform;
     transition-duration: 0s;
     transition-timing-function: linear;
-}
-
-.hidden {
-    display: none;
 }
