@@ -285,3 +285,40 @@ body {
     transition-duration: 0s;
     transition-timing-function: linear;
 }
+
+
+/* End game */
+.end-game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.result {
+    color: #fff;
+    font-family: var(--font-family-accent);
+    font-size: 64px;
+    line-height: 64px;
+    text-align: center;
+}
+
+.result.win {
+    background: -webkit-linear-gradient(95deg, #0ff40a, #025201);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.result.lose {
+    background: -webkit-linear-gradient(95deg, #f60351, #740030);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.total {
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+}
