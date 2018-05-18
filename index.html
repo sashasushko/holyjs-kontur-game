@@ -5,11 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kontur Game</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Stalinist+One|PT+Mono&amp;subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="start" onclick="start()">Start Game</button>
-    <div class="deck hidden"></div>
+    <div class="menu-screen hidden">
+        <div class="container">
+            <div class="game-name">Left vs. Right</div>
+            <div class="enspired">Enspired by Enky app</div>
+            <form class="start-menu">
+                <div class="field">
+                    <div class="label"><label for="username">Ваше имя</label></div>
+                    <div class="control"><input type="text" id="username" name="username"></div>
+                </div>
+                <div class="field">
+                    <div class="label"><label for="email">Эл.&thinsp;почта</label></div>
+                    <div class="control"><input type="email" id="email" name="email"></div>
+                </div>
+                <div class="field">
+                    <div class="label"><label for="theme">Тема</label></div>
+                    <div class="control">
+                        <select id="theme" name="theme">
+                            <option value="true-false" selected>Быть или не быть</option>
+                            <option value="es5">ES5 или зассал</option>
+                            <option value="lodash">Не lodash'ем единым</option>
+                            <option value="falsy">Честное благородное слово</option>
+                            <option value="jquery">jQuery за 300</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">Право на&nbsp;ошибку</div>
+                    <div class="control radio">
+                        <label>
+                            <input type="radio" name="level" checked>
+                            <span>5 раз</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="level">
+                            <span>3</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="level">
+                            <span>1</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="level">
+                            <span>Без права</span>
+                        </label>
+                    </div>
+                </div>
+                <button class="submit">Поехали!</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="game-screen hidden">
+        <div class="header">
+            <div class="username">ivan@pupkin.ru</div>
+            <div class="level">Сложный</div>
+            <div class="score">98765</div>
+        </div>
+        <div class="level-task">
+            <div class="question">Эта возможность была добавлена в ES5?</div>
+            <div class="answers">
+                <div class="answers-left">Нет</div>
+                <div class="answers-right">Да</div>
+            </div>
+        </div>
+        <div class="game-deck">
+            <div class="limit">
+                <span class="limit-label">Лимит</span>
+            </div>
+            <div class="bricks">
+                <div class="brick">NaN</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="end-game hidden">
+        <div class="container">
+            <div class="result lose">Потрачено</div>
+            <div class="total">Ваш счёт: 9876</div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
