@@ -3,6 +3,7 @@ var max = 20;
 var count = 0;
 var fail = 0;
 var height = 24;
+var lapTime = 3;
 
 var tasks = [
     {
@@ -90,6 +91,8 @@ var tasks = [
 var startBtn = document.querySelector(".start");
 var deck = document.querySelector(".deck");
 
+var speed = (document.documentElement.clientHeight - height) / lapTime;
+
 var random = function(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
@@ -120,10 +123,11 @@ var step = function() {
     deck.appendChild(brick);
 
     let endPosition = (deck.clientHeight - height) - (height * fail);
+    let duration = endPosition / speed;
 
     setTimeout(function() {
         brick.classList.add("animate");
-        brick.style.transitionDuration = "5s";
+        brick.style.transitionDuration = `${duration}s`;
         brick.style.transform = `translateX(-50%) translateY(${endPosition}px)`;
     }, 0);
 
