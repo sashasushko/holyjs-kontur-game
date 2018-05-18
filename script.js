@@ -92,13 +92,15 @@ const App = {
   constants: {
     limitErrors: 5,
     maxSteps: 20,
-    height: 24,
+    height: 44,
     lapTime: 3
   },
   tasks: initTasks.slice(),
   controls: {
+    startMenu: document.querySelector('.menu-screen'),
+    gameScreen: document.querySelector('.game-screen'),
     startBtn: document.querySelector('.start'),
-    deck: document.querySelector('.deck')
+    deck: document.querySelector('.bricks')
   },
   events: {
     init: function() {
@@ -328,7 +330,7 @@ const start = function() {
   App.username = prompt('Как вас зовут?', '');
   App.useremail = prompt('Ваша почта?', '');
   App.gameId = Date.now();
-  App.controls.startBtn.classList.add('hidden');
-  App.controls.deck.classList.remove('hidden');
+  App.controls.startMenu.classList.add('hidden');
+  App.controls.gameScreen.classList.remove('hidden');
   run();
 };

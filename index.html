@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="menu-screen hidden">
+    <div class="menu-screen">
         <div class="container">
             <div class="game-name">Left vs. Right</div>
             <div class="enspired">Enspired by Enky app</div>
@@ -55,7 +55,7 @@
                         </label>
                     </div>
                 </div>
-                <button class="submit">Поехали!</button>
+                <button onclick="start()" type="button" class="submit">Поехали!</button>
             </form>
         </div>
     </div>
@@ -77,9 +77,7 @@
             <div class="limit">
                 <span class="limit-label">Лимит</span>
             </div>
-            <div class="bricks">
-                <div class="brick">NaN</div>
-            </div>
+            <div class="bricks"></div>
         </div>
     </div>
 
