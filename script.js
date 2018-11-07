@@ -134,11 +134,6 @@ const initTasks = {
       ["-Infinity", 0]
     ]
   },
-  "true-false": {
-    question: "Чему равно выражение?",
-    answers: ["false", "true"],
-    tasks: []
-  },
   jquery: {
     question: "Это медот jQuery 3.x?",
     answers: ["Нет", "Есть"],
@@ -277,7 +272,7 @@ const App = {
   },
   vars: {
     theme: "",
-    limitErrors: 5
+    limitErrors: 3
   },
   constants: {
     maxSteps: null,
@@ -377,17 +372,17 @@ class HtmlHelper {
 
 const nextEvent = function() {
   if (
-    App.info.errorCount < App.vars.limitErrors &&
+    App.info.errorCount <= App.vars.limitErrors &&
     App.info.userSteps < App.constants.maxSteps
   ) {
     run();
-  } else if (App.info.errorCount >= App.vars.limitErrors) {
+  } else if (App.info.errorCount > App.vars.limitErrors) {
     App.events.loose({
       user: App.user,
       errorCount: App.info.errorCount,
       userSteps: App.info.userSteps
     });
-  } else if (App.info.userSteps >= App.constants.maxSteps) {
+  } else if (App.info.userSteps <= App.constants.maxSteps) {
     App.events.win({
       user: App.user,
       errorCount: App.info.errorCount,
@@ -578,26 +573,14 @@ const start = function() {
 
   for (var [key, value] of formData.entries()) {
     if (key === "level") {
-      App.vars.limitErrors = +value;
-      if (+value === 0) {
-        App.controls.limit.style.bottom = "-100px";
+      var numericValue = +value;
+      App.vars.limitErrors = numericValue;
+      if (numericValue === 0) {
+        App.controls.limit.style.bottom = "-200px";
       } else {
-        App.controls.limit.style.bottom = App.constants.height * +value + "px";
+        App.controls.limit.style.bottom =
+          App.constants.height * numericValue + "px";
       }
-      // switch (+value) {
-      //   case 5:
-      //     App.controls.level.textContent = "Пишу тесты";
-      //     break;
-      //   case 3:
-      //     App.controls.level.textContent = "Типизирую";
-      //     break;
-      //   case 1:
-      //     App.controls.level.textContent = "Пользуюсь SVN";
-      //     break;
-      //   case 0:
-      //     App.controls.level.textContent = "Форс-пуш в мастер";
-      //     break;
-      // }
     }
     if (key === "theme") {
       App.vars.theme = value;
